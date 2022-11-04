@@ -1,0 +1,66 @@
+{
+  "name": "payoursetest",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "18.1.0",
+    "react-native": "0.70.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "detox": "^19.12.6",
+    "eslint": "^7.32.0",
+    "jest": "^27.2.5",
+    "jest-circus": "^27.5.1",
+    "metro-react-native-babel-preset": "0.72.3",
+    "react-test-renderer": "18.1.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "detox": {
+    "devices": {
+      "emulator": {
+        "type": "android.attached",
+        "device": {
+          "adbName": "ae28a90d"
+        }
+      }
+    },
+    "apps": {
+      "android.debug": {
+        "type": "android.apk",
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd .."
+      },
+      "android.release": {
+        "type": "android.apk",
+        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd .."
+      }
+    },
+    "configurations": {
+      "android.emu.debug": {
+        "device": "emulator",
+        "app": "android.debug"
+      },
+      "android.emu.release": {
+        "device": "emulator",
+        "app": "android.release"
+      }
+    },
+    "test-runner": "jest",
+    "runnerConfig": "e2e/config.json",
+    "specs": "e2e"
+  }
+}
